@@ -4,30 +4,27 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend # Path to the directory containing the backend Dockerfile
+    build: ./backend
     container_name: italian-brainrot-backend
-    ports:
-      - "8000:8000" # Map host port 8000 to container port 8000
+    # No 'ports' section needed here if accessed only via nginx proxy
     volumes:
-      # Mount the static directory from the host into the container
-      # This makes generated videos accessible via the /static route
-      # and persists them on the host machine.
+      # Mount for persistent video storage, accessible by backend
       - ./backend/static:/app/static
     environment:
-      # Ensures Python logs appear immediately
       - PYTHONUNBUFFERED=1
-    # Add restart policy if desired, e.g.:
-    # restart: unless-stopped
+    # restart: unless-stopped # Consider adding for production
 
   frontend:
-    build: ./frontend # Path to the directory containing the frontend Dockerfile
+    build: ./frontend
     container_name: italian-brainrot-frontend
     ports:
-      - "5173:80" # Map host port 5173 (common Vite dev port) to Nginx container port 80
+      # Map HOST port 80 to CONTAINER port 80 (Nginx default)
+      - "80:80"
+      # If setting up HTTPS later, you might map 443 instead or alongside
+      # - "443:443"
     depends_on:
-      - backend # Optional: waits for backend to start first (doesn't guarantee readiness)
-    # Add restart policy if desired, e.g.:
-    # restart: unless-stopped
+      - backend # Ensures backend starts before frontend (optional but good practice)
+    # restart: unless-stopped # Consider adding for production
 
 # Optional: Define named volumes if you prefer not to mount host directories
 # volumes:
