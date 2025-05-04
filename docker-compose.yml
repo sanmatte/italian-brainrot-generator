@@ -1,0 +1,34 @@
+# src/docker-compose.yml
+
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend # Path to the directory containing the backend Dockerfile
+    container_name: italian-brainrot-backend
+    ports:
+      - "8000:8000" # Map host port 8000 to container port 8000
+    volumes:
+      # Mount the static directory from the host into the container
+      # This makes generated videos accessible via the /static route
+      # and persists them on the host machine.
+      - ./backend/static:/app/static
+    environment:
+      # Ensures Python logs appear immediately
+      - PYTHONUNBUFFERED=1
+    # Add restart policy if desired, e.g.:
+    # restart: unless-stopped
+
+  frontend:
+    build: ./frontend # Path to the directory containing the frontend Dockerfile
+    container_name: italian-brainrot-frontend
+    ports:
+      - "5173:80" # Map host port 5173 (common Vite dev port) to Nginx container port 80
+    depends_on:
+      - backend # Optional: waits for backend to start first (doesn't guarantee readiness)
+    # Add restart policy if desired, e.g.:
+    # restart: unless-stopped
+
+# Optional: Define named volumes if you prefer not to mount host directories
+# volumes:
+#   backend_static_data:
