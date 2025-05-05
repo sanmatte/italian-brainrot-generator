@@ -1,31 +1,21 @@
-# src/docker-compose.yml
-
 version: '3.8'
 
 services:
   backend:
     build: ./backend
     container_name: italian-brainrot-backend
-    # No 'ports' section needed here if accessed only via nginx proxy
     volumes:
-      # Mount for persistent video storage, accessible by backend
+      # Mount for persistent video storage
       - ./backend/static:/app/static
     environment:
       - PYTHONUNBUFFERED=1
-    # restart: unless-stopped # Consider adding for production
+    restart: unless-stopped
 
   frontend:
     build: ./frontend
     container_name: italian-brainrot-frontend
     ports:
-      # Map HOST port 80 to CONTAINER port 80 (Nginx default)
       - "80:80"
-      # If setting up HTTPS later, you might map 443 instead or alongside
-      # - "443:443"
     depends_on:
-      - backend # Ensures backend starts before frontend (optional but good practice)
-    # restart: unless-stopped # Consider adding for production
-
-# Optional: Define named volumes if you prefer not to mount host directories
-# volumes:
-#   backend_static_data:
+      - backend
+    restart: unless-stopped

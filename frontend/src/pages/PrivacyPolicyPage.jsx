@@ -3,7 +3,6 @@ import React from 'react';
 
 // GitHub URL - make sure it's consistent or imported
 const githubUrl = "https://github.com/sanmatte/italian-brainrot-generator";
-const effectiveDate = "May 4, 2025"; // Update as needed
 
 function PrivacyPolicyPage() {
   return (
@@ -13,7 +12,7 @@ function PrivacyPolicyPage() {
         House Rules (Privacy Policy)
       </h1>
       <p className="mb-6 text-sm italic">
-        Effective Date: {effectiveDate} // Basically, we're chill.
+        // Basically, it's chill.
       </p>
 
       <h2 className="text-lg md:text-xl font-semibold text-gray-800 mt-6 mb-2">What Happens With Your Stuff? (Not Much)</h2>
