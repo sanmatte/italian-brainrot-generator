@@ -1,0 +1,70 @@
+@import "tailwindcss";
+body {
+  @apply font-sans text-gray-800; /* Text color will be overridden on bg */
+  background-color: #000; /* Fallback background */
+}
+
+/* Define the animated galaxy background */
+.animated-galaxy-background {
+  /* Base dark gradient (subtle nebula effect) */
+  --galaxy-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+
+  /* Stars layers using radial gradients for dots */
+  --stars-sm: radial-gradient(white 0.5px, transparent 0.5px); /* Small stars */
+  --stars-md: radial-gradient(white 1px, transparent 1px);   /* Medium stars */
+  --stars-lg: radial-gradient(white 1.5px, transparent 1.5px); /* Larger stars */
+
+  /* Combine layers */
+  background-image:
+    var(--stars-sm),
+    var(--stars-md),
+    var(--stars-lg),
+    var(--galaxy-bg);
+
+  /* Define sizes for star layers (controls density) */
+  background-size:
+    100px 100px, /* Small stars repeat every 100px */
+    200px 200px, /* Medium stars repeat every 200px */
+    300px 300px, /* Large stars repeat every 300px */
+    100% 100%;   /* Base gradient covers fully */
+
+  /* Initial positions & ensure repetition */
+  background-position: 0 0, 50px 50px, 100px 100px, 0 0; /* Offset layers */
+  background-repeat: repeat, repeat, repeat, no-repeat;
+
+  /* Animation */
+  animation: moveStars 150s linear infinite; /* Adjust duration (150s) for speed */
+
+  /* Ensure background attachment if needed (usually not necessary for body/main container) */
+  /* background-attachment: fixed; */
+}
+
+/* Define the keyframes for star movement */
+@keyframes moveStars {
+  from {
+    /* Start position of star layers */
+    background-position: 0 0, 50px 50px, 100px 100px, 0 0;
+  }
+  to {
+    /* End position (move diagonally, adjust values for different speed/direction) */
+    /* Move each star layer by a large amount */
+    background-position: -10000px 5000px, -7500px 3750px, -5000px 2500px, 0 0;
+  }
+}
+
+/* Ensure full height coverage */
+html, body, #root {
+    height: 100%;
+    margin: 0; /* Remove default body margin */
+    padding: 0;
+}
+/* Apply to the main container for sticky footer */
+.flex-container-for-footer {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.flex-grow-for-footer {
+    flex-grow: 1;
+}
+
