@@ -196,7 +196,6 @@ async def create_video(
     return {"videoFilename": output_video_filename}
 
 
-# --- Endpoint to Serve Video Files ---
 @app.get("/videos/{filename}")
 async def get_video(filename: str):
     file_path = VIDEO_DIR / filename
@@ -204,8 +203,6 @@ async def get_video(filename: str):
     # Security checks...
     if file_path.resolve().parent == VIDEO_DIR.resolve():
         return FileResponse(path=str(file_path), media_type='video/mp4', filename=filename)
-
-# --- Root endpoint ---
 
 
 @app.get("/")

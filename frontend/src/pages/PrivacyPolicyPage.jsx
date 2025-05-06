@@ -1,12 +1,9 @@
-// src/pages/PrivacyPolicyPage.jsx
 import React from 'react';
 
-// GitHub URL - make sure it's consistent or imported
 const githubUrl = "https://github.com/sanmatte/italian-brainrot-generator";
 
 function PrivacyPolicyPage() {
   return (
-    // Using clean card style (ensure it's readable over galaxy bg)
     <div className="bg-white p-6 md:p-8 shadow-xl rounded-xl border border-gray-200 max-w-3xl mx-auto text-gray-700 text-base leading-relaxed">
       <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         House Rules (Privacy Policy)
@@ -60,9 +57,6 @@ function PrivacyPolicyPage() {
         <li><strong className="font-medium">Contact:</strong> Questions? Existential doubts? Email us at [Insert Placeholder Email Here, e.g., contact@brainrot.generator.xyz (Not real)].</li>
       </ul>
 
-       <p className="mt-6 border-t border-gray-200 pt-4 text-xs text-gray-500 italic">
-        Disclaimer: This isn't fancy legal advice from lawyers in suits. It's written by us. For serious stuff, ask a real lawyer. By using the site, you agree to these rules. Trallalero Trallala.
-       </p>
     </div>
   );
 }

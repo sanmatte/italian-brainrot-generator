@@ -1,7 +1,5 @@
-// src/components/ProgressDisplay.jsx
 import React from 'react';
 
-// Simple icons (you could replace these with SVG icons from a library like react-icons)
 const IconPending = () => <span className="text-gray-400">⏳</span>;
 const IconInProgress = () => <span className="animate-spin text-blue-500">⚙️</span>;
 const IconSuccess = () => <span className="text-green-500">✅</span>;
