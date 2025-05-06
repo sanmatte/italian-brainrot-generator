@@ -28,7 +28,7 @@ TEMP_DIR.mkdir(parents=True, exist_ok=True)
 app = FastAPI(title="Italian Brainrot Generator Backend")
 
 origins = [
-    "http://localhost:5173",
+    "http://localhost:5173",  # used for development
     "http://127.0.0.1:5173",
 ]
 app.add_middleware(
@@ -52,6 +52,7 @@ async def create_video(
         f"{temp_id}_audio{Path(audio_file.filename or '.mp3').suffix}"
     temp_image_path = TEMP_DIR / \
         f"{temp_id}_image{Path(image_file.filename or '.jpg').suffix}"
+
     output_video_filename = f"{temp_id}.mp4"
     output_video_path = VIDEO_DIR / output_video_filename
 
